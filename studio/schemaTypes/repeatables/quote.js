@@ -8,7 +8,7 @@ export default {
             type: 'string',
             title: 'Copy',
             validation: (Rule) => Rule.required()
-        },
+        }
     ],
     preview: {
         select: {

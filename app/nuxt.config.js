@@ -103,8 +103,7 @@ export default defineNuxtConfig({
     plugins: [
         '~/plugins/sanity.js',
         '~/plugins/sanity-image-helper.js',
-        '~/plugins/fetch-global-data.js',
-        '~/plugins/sitemap.js'
+        '~/plugins/fetch-global-data.js'
     ],
 
     css: ['@/assets/scss/_normalize.scss', '@/assets/scss/global.scss'],
@@ -122,29 +121,7 @@ export default defineNuxtConfig({
         }
     },
 
-    sitemap: {
-        exclude: ['/sandbox', '/error', '/undefined'],
-        urls: async () => {
-            const dynamicRoutes = [];
-            const postsQuery = '*[_type == "post"] { slug, _updatedAt }';
-
-            const posts = await client.fetch(postsQuery).catch((error) => {
-                console.error('Error fetching posts for sitemap:', error);
-                return [];
-            });
-
-            posts.map((post) => {
-                dynamicRoutes.push({
-                    url: `/${post.slug?.fullUrl}`,
-                    lastmod: post._updatedAt,
-                    changefreq: 'weekly',
-                    priority: 0.5
-                });
-            });
-
-            return dynamicRoutes;
-        }
-    },
+    sitemap: { exclude: ['/sandbox', '/error', '/undefined'] },
 
     ssr: true,
     components: true,

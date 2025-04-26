@@ -1,10 +1,8 @@
 <template>
-    <div class="default" :class="{ fixed: navOpen }">
-        <Header />
+    <div class="default">
         <main>
             <slot />
         </main>
-        <Footer />
     </div>
 </template>
 
@@ -16,19 +14,6 @@ export default {
     name: 'DefaultLayout',
     data() {
         return { globalStore: useGlobalStore() };
-    },
-    computed: {
-        navOpen() {
-            return this.globalStore?.navOpen;
-        }
-    },
-    watch: {
-        $route() {
-            this.globalStore.setNavOpen(false);
-            window.scrollTo({ top: 0 });
-        }
     }
 };
 </script>
-
-<style lang="scss" scoped></style>

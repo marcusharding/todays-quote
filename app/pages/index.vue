@@ -1,7 +1,6 @@
 <template>
-    <div class="index">
-        <Hero :data="data" />
-        <PageBuilder v-if="data?.pageBuilder" :components="data?.pageBuilder?.pageBuilderBlocks" />
+    <div class="index container site-content-container">
+        <p>{{ quoteOfTheDay?.quote }}</p>
     </div>
 </template>
 
@@ -10,16 +9,8 @@
 import { homepageQuery } from '~/queries/pages/homepage';
 import { metaQuery } from '~/queries/helpers/pageMeta';
 
-// COMPONENTS
-import PageBuilder from '~/components/PageBuilder';
-import Hero from '~/components/reUsable/Hero';
-
-// PARAMS
-const params = useRoute().query;
-const isPreview = params.preview === 'true';
-
 // DATA
-const { data, error: dataError } = await useSanityQuery(homepageQuery(isPreview));
+const { data, error: dataError } = await useSanityQuery(homepageQuery);
 const { data: meta, error: metaError } = await useSanityQuery(metaQuery('homepage'));
 
 if (dataError.value) {
@@ -32,4 +23,39 @@ if (metaError.value) {
 
 // META
 useMeta(meta?.value?.metaData, data?.value);
+
+// METHODS
+const quoteOfTheDay = computed(() => {
+
+    if (!data.value || data.value.length === 0) return null;
+
+    const today = new Date();
+
+    const dayOfYear = Math.floor(
+        (today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24
+    );
+
+    const quoteIndex = dayOfYear % data.value.length;
+    return data.value[quoteIndex];
+});
+
 </script>
+
+<style lang="scss" scoped>
+
+.index.container {
+    height: 100vh;
+    height: 100dvh;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.index p {
+    @include typography('heading-4');
+    font-weight: 500;
+}
+
+</style>

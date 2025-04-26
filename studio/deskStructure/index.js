@@ -1,12 +1,10 @@
-import {GiHamburgerMenu} from 'react-icons/gi';
-import {FaFolderOpen, FaSlidersH, FaThLarge} from 'react-icons/fa';
+import {FaFolderOpen, FaSlidersH} from 'react-icons/fa';
 
 export const deskStructure = (S, context) => {
     return S.list()
 
         .title('Content')
         .items([
-
             // Site Settings
             S.listItem()
                 .title('Site Settings')

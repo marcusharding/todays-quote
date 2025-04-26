@@ -1,12 +1,15 @@
 @use "sass:map";
 @use "@/assets/scss/variables" as variables;
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;800&display=swap');
 
-@font-face {
-    font-family: 'Circular';
+body {
+    width: 100%;
+
+    -webkit-font-smoothing: antialiased;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
     font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('../fonts/Circular/circular-book.woff2') format('woff2');
 }
 
 $typography: (
