@@ -71,7 +71,7 @@ export default defineNuxtConfig({
         projectId: process.env.FULLVIEWPORT_SANITY_STARTER_SANITY_ID,
         dataset: process.env.FULLVIEWPORT_SANITY_STARTER_SANITY_DATASET,
         useCdn: process.env.NODE_ENV === 'production',
-        apiVersion: process.env.FULLVIEWPORT_SANITY_STARTER_SANITY_API_VERSION || '2025-02-19',
+        apiVersion: process.env.FULLVIEWPORT_SANITY_STARTER_SANITY_API_VERSION || '2025-02-19'
     },
 
     gtag: {

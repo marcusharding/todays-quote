@@ -1,6 +1,6 @@
 import { useGlobalStore } from '~/store/global';
 
-export const useMeta = (metadata = {}, data = {}) => {
+export const useMeta = () => {
     const globalStore = useGlobalStore();
     const image = globalStore?.siteSettings?.metaImage?.url || '';
     const title = globalStore?.siteSettings?.metaTitle || '';

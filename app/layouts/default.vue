@@ -20,6 +20,6 @@ export default {
 
 <style lang="scss" scoped>
 .default {
-    background-color: #F5F4F3;
+    background-color: #f5f4f3;
 }
 </style>
