@@ -27,16 +27,17 @@ useMeta(meta?.value?.metaData, data?.value);
 
 // METHODS
 const quoteOfTheDay = computed(() => {
-    if (!data.value || data.value.length === 0) return undefined;
+    const list = data.value || [];
 
-    const today = new Date();
+    if (!list.length) return undefined;
 
-    const dayOfYear = Math.floor(
-        (today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24
-    );
+    const now = new Date();
+    const startOfYearUTC = Date.UTC(now.getUTCFullYear(), 0, 0);
+    const todayUTC = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
 
-    const quoteIndex = dayOfYear % data.value.length;
-    return data.value[quoteIndex];
+    const dayOfYear = Math.floor((todayUTC - startOfYearUTC) / (1000 * 60 * 60 * 24));
+
+    return list[dayOfYear % list.length];
 });
 
 const setVh = () => {
