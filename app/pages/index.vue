@@ -28,13 +28,20 @@ useMeta(meta?.value?.metaData, data?.value);
 // METHODS
 const quoteOfTheDay = computed(() => {
     const list = data.value || [];
-
     if (!list.length) return undefined;
 
-    const now = new Date();
-    const startOfYearUTC = Date.UTC(now.getUTCFullYear(), 0, 0);
-    const todayUTC = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+    const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/Toronto',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+    }).formatToParts(new Date());
 
+    const y = Number(parts.find((p) => p.type === 'year').value);
+    const m = Number(parts.find((p) => p.type === 'month').value) - 1;
+    const d = Number(parts.find((p) => p.type === 'day').value);
+    const startOfYearUTC = Date.UTC(y, 0, 0);
+    const todayUTC = Date.UTC(y, m, d);
     const dayOfYear = Math.floor((todayUTC - startOfYearUTC) / (1000 * 60 * 60 * 24));
 
     return list[dayOfYear % list.length];
